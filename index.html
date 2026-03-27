@@ -2,33 +2,36 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>莫增贤 | 资深空间设计师 | 作品集</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>莫增贤 | 空间设计师 | 作品集</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
-        body { font-family: 'Noto Sans SC', sans-serif; scroll-behavior: smooth; }
-        .accent-color { color: #c2a379; }
-        .accent-bg { background-color: #c2a379; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap');
+        * { font-family: 'Inter', 'Noto Sans SC', system-ui, -apple-system, sans-serif; }
+        body { background-color: #fefcf8; scroll-behavior: smooth; }
+        .accent-color { color: #b88b4f; }
+        .accent-bg { background-color: #b88b4f; }
+        .border-accent { border-color: #b88b4f; }
         
         /* 作品卡片效果 */
         .work-card {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             cursor: pointer;
             overflow: hidden;
             position: relative;
+            background: white;
         }
-        .work-card:hover { transform: translateY(-10px); }
-        .work-card img, .work-card video { transition: transform 0.8s ease; }
-        .work-card:hover img, .work-card:hover video { transform: scale(1.05); }
+        .work-card:hover { transform: translateY(-6px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.1); }
+        .work-card img, .work-card video { transition: transform 0.7s ease; }
+        .work-card:hover img, .work-card:hover video { transform: scale(1.03); }
         
         .overlay {
-            background: rgba(0,0,0,0.4);
-            opacity: 1;
-            transition: opacity 0.3s;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-        .video-card:hover .overlay { opacity: 0; }
+        .work-card:hover .overlay { opacity: 1; }
 
         /* 模态框样式 */
         #projectModal {
@@ -36,151 +39,158 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1000;
-            background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(5px);
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(6px);
         }
         .modal-content {
-            max-height: 90vh;
+            max-height: 88vh;
             overflow-y: auto;
+            border-radius: 28px;
         }
-        .modal-content::-webkit-scrollbar { width: 6px; }
-        .modal-content::-webkit-scrollbar-thumb { background: #c2a379; border-radius: 10px; }
-        .modal-content::-webkit-scrollbar-track { background: #f1f1f1; }
+        .modal-content::-webkit-scrollbar { width: 5px; }
+        .modal-content::-webkit-scrollbar-thumb { background: #b88b4f; border-radius: 20px; }
 
         .skill-tag {
-            background: #f8f1e7;
-            color: #8b6e4e;
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 0.875rem;
-            border-left: 3px solid #c2a379;
+            background: #f6efe5;
+            color: #7a5a3a;
+            padding: 5px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s;
         }
-
-        /* 动画类 */
-        .fade-in { animation: fadeIn 0.4s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeSlide 0.4s ease-out; }
+        @keyframes fadeSlide { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .nav-link { transition: color 0.2s; }
+        .nav-link:hover { color: #b88b4f; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="text-gray-800">
 
-    <!-- 导航栏 -->
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 px-6 py-4">
+    <!-- 导航栏 (轻量简洁) -->
+    <nav class="fixed w-full z-50 bg-white/85 backdrop-blur-md border-b border-gray-100/80 px-6 py-3">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="text-xl font-bold tracking-tighter">MO <span class="accent-color">ZENGXIAN</span></div>
+            <div class="text-xl font-bold tracking-tight">MO <span class="accent-color">ZENGXIAN</span></div>
             <div class="hidden md:flex space-x-8 text-sm font-medium">
-                <a href="#video-section" class="hover:text-[#c2a379]">动态演示</a>
-                <a href="#portfolio" class="hover:text-[#c2a379]">精选作品</a>
-                <a href="#about" class="hover:text-[#c2a379]">核心优势</a>
-                <a href="mailto:994565663@qq.com" class="accent-bg text-white px-4 py-1 rounded">立即联系</a>
+                <a href="#video-section" class="nav-link">动态演示</a>
+                <a href="#portfolio" class="nav-link">精选作品</a>
+                <a href="#about" class="nav-link">核心优势</a>
+                <a href="mailto:994565663@qq.com" class="accent-bg text-white px-5 py-1.5 rounded-full text-sm shadow-sm hover:opacity-90 transition">联系</a>
             </div>
         </div>
     </nav>
 
-    <!-- 英雄页 - 移除个人介绍段落，保留姓名、头衔、联系方式和数据卡片 -->
-    <section class="pt-32 pb-20 px-6 bg-[#1a1a1a] text-white">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
+    <!-- 英雄区 (移除薪资期望，仅保留核心身份) -->
+    <section class="pt-32 pb-20 px-6 bg-[#1f1c18] text-white">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
             <div class="md:w-3/5">
-                <div class="inline-block px-3 py-1 mb-4 text-xs font-bold tracking-widest uppercase bg-amber-900/30 text-[#c2a379] border border-[#c2a379]/30 rounded">
+                <div class="inline-block px-3 py-1 mb-5 text-xs font-semibold tracking-wider uppercase bg-amber-800/40 text-[#dbb87a] border border-[#dbb87a]/40 rounded-full">
                     Senior Spatial Designer
                 </div>
-                <h1 class="text-5xl font-bold mb-4">莫增贤</h1>
-                <p class="text-xl accent-color mb-6 uppercase tracking-widest font-light">资深空间设计师 | SI系统专家 | AI工作流深度实践者</p>
-                <div class="flex flex-wrap gap-6 text-sm">
+                <h1 class="text-5xl md:text-6xl font-bold mb-4 tracking-tight">莫增贤</h1>
+                <p class="text-xl text-[#dbb87a] mb-5 font-light tracking-wide">资深空间设计师 · SI系统专家 · AI工作流实践者</p>
+                <p class="text-gray-300 mb-8 max-w-2xl leading-relaxed text-base">
+                    9年设计经验，擅长将品牌策略转化为空间语言，具备从概念、深化到交付的全流程管控能力。主导100+项目落地，通过AI设计工作流提效60%，助力品牌终端标准化与商业价值提升。
+                </p>
+                <div class="flex flex-wrap gap-6 text-sm text-gray-200">
                     <span><i class="fas fa-phone mr-2 accent-color"></i>135-3311-3296</span>
                     <span><i class="fas fa-envelope mr-2 accent-color"></i>994565663@qq.com</span>
                     <span><i class="fas fa-location-dot mr-2 accent-color"></i>广州</span>
                 </div>
             </div>
-            <div class="md:w-1/3 mt-12 md:mt-0">
+            <div class="md:w-1/3">
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="p-6 bg-white/5 border border-white/10 rounded-lg text-center backdrop-blur-sm">
-                        <div class="text-3xl font-bold accent-color">100+</div>
-                        <div class="text-[10px] text-gray-500 uppercase mt-1">项目落地经验</div>
+                    <div class="p-6 bg-white/5 border border-white/10 rounded-2xl text-center backdrop-blur-sm">
+                        <div class="text-4xl font-bold accent-color">100+</div>
+                        <div class="text-[11px] text-gray-400 uppercase mt-1 tracking-wide">落地项目</div>
                     </div>
-                    <div class="p-6 bg-white/5 border border-white/10 rounded-lg text-center backdrop-blur-sm">
-                        <div class="text-3xl font-bold accent-color">30%+</div>
-                        <div class="text-[10px] text-gray-500 uppercase mt-1">门店客流提升</div>
+                    <div class="p-6 bg-white/5 border border-white/10 rounded-2xl text-center backdrop-blur-sm">
+                        <div class="text-4xl font-bold accent-color">30%</div>
+                        <div class="text-[11px] text-gray-400 uppercase mt-1 tracking-wide">门店客流提升</div>
                     </div>
-                    <div class="p-6 bg-white/5 border border-white/10 rounded-lg text-center backdrop-blur-sm">
-                        <div class="text-3xl font-bold accent-color">60%</div>
-                        <div class="text-[10px] text-gray-500 uppercase mt-1">AI 迭代提效</div>
+                    <div class="p-6 bg-white/5 border border-white/10 rounded-2xl text-center backdrop-blur-sm">
+                        <div class="text-4xl font-bold accent-color">60%</div>
+                        <div class="text-[11px] text-gray-400 uppercase mt-1 tracking-wide">AI提效赋能</div>
                     </div>
-                    <div class="p-6 bg-white/5 border border-white/10 rounded-lg text-center backdrop-blur-sm">
-                        <div class="text-3xl font-bold accent-color">9Y+</div>
-                        <div class="text-[10px] text-gray-500 uppercase mt-1">行业经验沉淀</div>
+                    <div class="p-6 bg-white/5 border border-white/10 rounded-2xl text-center backdrop-blur-sm">
+                        <div class="text-4xl font-bold accent-color">9Y+</div>
+                        <div class="text-[11px] text-gray-400 uppercase mt-1 tracking-wide">专业深耕</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 视频展示板块 -->
-    <section id="video-section" class="pt-24 px-6 bg-white">
+    <!-- 动态演示视频板块 -->
+    <section id="video-section" class="pt-24 pb-12 px-6 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="mb-12">
-                <div class="flex justify-between items-end">
+                <div class="flex justify-between items-end flex-wrap gap-2">
                     <div>
-                        <h2 class="text-3xl font-bold mb-2">动态演示案例</h2>
-                        <div class="w-20 h-1 accent-bg"></div>
+                        <h2 class="text-3xl font-bold mb-2 tracking-tight">AI设计 · 动态演示</h2>
+                        <div class="w-20 h-0.5 accent-bg"></div>
                     </div>
-                    <span class="text-xs text-gray-400 mb-2 uppercase tracking-widest">Mute Preview / 移入预览</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider">移入播放预览</span>
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="videoGrid"></div>
         </div>
     </section>
 
-    <!-- 核心作品网格 -->
-    <section id="portfolio" class="py-24 px-6 bg-white">
+    <!-- 精选作品集网格 -->
+    <section id="portfolio" class="py-20 px-6 bg-gray-50">
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-14">
                 <div>
-                    <h2 class="text-3xl font-bold mb-2">精选作品集</h2>
-                    <div class="w-20 h-1 accent-bg"></div>
+                    <h2 class="text-3xl font-bold mb-2 tracking-tight">精选作品集</h2>
+                    <div class="w-20 h-0.5 accent-bg"></div>
                 </div>
-                <p class="text-gray-400 mt-4 md:mt-0 italic">AI 专项 / 商业零售 / 品牌展厅 / 科研办公</p>
+                <p class="text-gray-500 mt-3 md:mt-0 text-sm">AI 专项 / 商业零售 / 品牌展厅 / 科研办公</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="portfolioGrid"></div>
         </div>
     </section>
 
-    <!-- 核心能力板块 -->
+    <!-- 核心能力模块 (独立，无履历) -->
     <section id="about" class="py-24 px-6 bg-white">
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
                 <!-- 能力画像 -->
                 <div>
-                    <h3 class="text-2xl font-bold mb-8 flex items-center">
-                        <span class="w-8 h-1 accent-bg mr-4"></span>核心能力画像
+                    <h3 class="text-2xl font-bold mb-7 flex items-center">
+                        <span class="w-8 h-0.5 accent-bg mr-4"></span>核心能力画像
                     </h3>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="skill-tag">SI 系统工程设计</div>
-                        <div class="skill-tag">商业动线逻辑优化</div>
-                        <div class="skill-tag">科研办公空间规划</div>
-                        <div class="skill-tag">施工节点与图纸深化</div>
-                        <div class="skill-tag">多项目并行管理</div>
-                        <div class="skill-tag">灯光与软装整合</div>
+                    <div class="flex flex-wrap gap-3 mb-8">
+                        <span class="skill-tag">SI系统工程设计</span>
+                        <span class="skill-tag">商业动线优化</span>
+                        <span class="skill-tag">科研办公空间</span>
+                        <span class="skill-tag">施工图深化</span>
+                        <span class="skill-tag">多项目并行管理</span>
+                        <span class="skill-tag">灯光软装整合</span>
+                        <span class="skill-tag">品牌空间标准化</span>
+                        <span class="skill-tag">全案落地管控</span>
                     </div>
-                    <div class="mt-8 text-gray-500 text-sm leading-relaxed">
-                        华南农业大学（统招本科）环境艺术设计毕业。具备从 0 到 1 构建品牌空间标准手册的能力，擅长模块化设计以降低连锁装修成本。
+                    <div class="text-gray-500 text-sm leading-relaxed border-l-2 border-[#b88b4f] pl-5">
+                        华南农业大学 · 环境艺术设计 (统招本科)。具备从0到1构建品牌空间标准手册的能力，擅长模块化设计以降低连锁扩张成本，兼顾美学与商业转化。
                     </div>
                 </div>
                 <!-- AI 专项 -->
-                <div class="bg-gray-900 p-8 rounded-2xl text-white">
+                <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-2xl text-white shadow-xl">
                     <h3 class="text-2xl font-bold mb-6 flex items-center">
-                        <span class="w-8 h-1 accent-bg mr-4"></span>AI 设计专项 (提效利器)
+                        <span class="w-8 h-0.5 accent-bg mr-4"></span>AI设计专项 · 提效利器
                     </h3>
                     <div class="space-y-6">
                         <div>
-                            <p class="accent-color text-xs font-bold mb-2 uppercase tracking-widest">Technology Stack</p>
-                            <p class="text-sm font-light">Stable Diffusion / ComfyUI / ControlNet / Lora Training</p>
+                            <p class="text-[#dbb87a] text-xs font-bold mb-2 uppercase tracking-wider">技术栈</p>
+                            <p class="text-sm font-light text-gray-200">Stable Diffusion / ComfyUI / ControlNet / LoRA Training / Midjourney</p>
                         </div>
-                        <div class="border-t border-white/10 pt-4">
-                            <p class="accent-color text-xs font-bold mb-2 uppercase tracking-widest">Applied Scenes</p>
-                            <ul class="text-xs text-gray-400 space-y-2">
-                                <li>• <strong>瞬时推演：</strong>快速切换材质、灯光、软装风格辅助决策。</li>
-                                <li>• <strong>高保真细化：</strong>手稿 1:1 转化为写实透视图，降低沟通偏差。</li>
-                                <li>• <strong>资产数字化：</strong>利用 AI 生成高质量背景与材质贴图。</li>
+                        <div class="border-t border-white/15 pt-5">
+                            <p class="text-[#dbb87a] text-xs font-bold mb-2 uppercase tracking-wider">落地应用场景</p>
+                            <ul class="text-xs text-gray-300 space-y-2 leading-relaxed">
+                                <li>• <strong>瞬时推演：</strong>快速切换材质、灯光、软装风格，辅助设计决策</li>
+                                <li>• <strong>草图转写实：</strong>手稿/SketchUp线稿1:1转化为高保真效果图，降低沟通偏差</li>
+                                <li>• <strong>资产数字化：</strong>AI生成高质量贴图与场景氛围图，方案效率提升60%</li>
                             </ul>
                         </div>
                     </div>
@@ -189,68 +199,68 @@
         </div>
     </section>
 
-    <!-- 底部 -->
-    <footer class="py-16 bg-[#1a1a1a] text-center text-gray-500 text-sm border-t border-white/5">
-        <div class="flex justify-center gap-12 mb-8">
+    <!-- 页脚联系方式（简洁无履历） -->
+    <footer class="py-16 bg-[#1f1c18] text-center text-gray-400 text-sm">
+        <div class="flex justify-center gap-12 mb-8 flex-wrap">
             <div class="text-left">
-                <p class="text-[10px] uppercase text-gray-600 mb-1 tracking-widest">Call Me</p>
+                <p class="text-[10px] uppercase text-gray-500 mb-1 tracking-widest">电话</p>
                 <p class="text-white">135-3311-3296</p>
             </div>
             <div class="text-left">
-                <p class="text-[10px] uppercase text-gray-600 mb-1 tracking-widest">Email Me</p>
+                <p class="text-[10px] uppercase text-gray-500 mb-1 tracking-widest">邮箱</p>
                 <p class="text-white">994565663@qq.com</p>
             </div>
         </div>
-        <p>© 2025 莫增贤 | Senior Spatial Designer Portfolio</p>
+        <p class="text-xs opacity-70">© 2025 莫增贤 · 空间设计作品集 | 构筑品牌与空间的桥梁</p>
     </footer>
 
     <!-- 模态框 -->
     <div id="projectModal" class="flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-6xl rounded-lg modal-content relative shadow-2xl">
-            <button onclick="closeModal()" class="absolute right-6 top-6 z-50 text-3xl text-gray-400 hover:text-black hover:scale-110 transition-transform bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg">&times;</button>
-            <div id="modalBody" class="p-8 md:p-12"></div>
+        <div class="bg-white w-full max-w-6xl rounded-2xl modal-content relative shadow-2xl">
+            <button onclick="closeModal()" class="absolute right-5 top-5 z-50 text-3xl text-gray-400 hover:text-black transition-all bg-white rounded-full w-9 h-9 flex items-center justify-center shadow-md">&times;</button>
+            <div id="modalBody" class="p-6 md:p-10"></div>
         </div>
     </div>
 
     <script>
-        // --- 视频数据 (AI专项) ---
+        // ---------- 视频演示数据 (AI工作流) ----------
         const videoProjects = [
             {
                 id: 'v1',
-                title: "AI从毛坯到效果图",
+                title: "AI毛坯到效果图",
                 category: "AI Workflow / Img2Img",
                 videoUrl: "video/001.mp4", 
-                intro: "实录演示：将现场毛坯照片导入 SD，通过“图生图”配合 Depth 深度图控制，10分钟内生成材质真实、光影准确的空间预演方案。"
+                intro: "现场毛坯照片导入SD，通过图生图+Depth深度图控制，10分钟内生成材质真实、光影准确的空间预演方案。"
             },
             {
                 id: 'v2',
-                title: "利用ControlNet线稿+LoRA出效果图",
-                category: "AI Tech / Model Training",
+                title: "ControlNet线稿 + LoRA",
+                category: "AI Tech / 风格训练",
                 videoUrl: "video/002.mp4", 
-                intro: "技术拆解：提取 SketchUp 线稿，挂载自训练的品牌风格 LoRA 模型。精确控制软装与硬装的生成边界，实现“指哪打哪”的精准设计。"
+                intro: "提取SketchUp线稿，挂载自训练品牌风格LoRA模型，精确控制软装与硬装生成边界。"
             },
             {
                 id: 'v3',
-                title: "AI深度控图+线稿控制实现复杂场景出图",
-                category: "AI Advanced / Complex Scene",
+                title: "复杂场景深度控图",
+                category: "AI Advanced / 多重控制",
                 videoUrl: "video/003.mp4",
-                intro: "高阶应用：针对多层次、多光源的复杂商业场景，叠加 Canny + Depth + MLSD 多重控制网，解决 AI 空间透视扭曲痛点，产出落地级图纸。"
+                intro: "针对多层次商业空间，叠加Canny+Depth+MLSD多重控制网，解决AI透视扭曲，产出落地级图纸。"
             }
         ];
 
-        // --- 作品数据配置 (完整保留所有项目) ---
+        // ---------- 作品数据（完整保留，不包含履历相关内容）----------
         const projects = [
-            // 1. AI 作品 - 概念推演
+            // 1. AI 概念极速推演
             {
                 id: 'ai-1',
                 title: "AI 概念极速推演流",
                 category: "AI Workflow / Stable Diffusion",
                 cover: "images/04-rsfg/008.png",
-                intro: "利用 SD + ControlNet 在 1 小时内产出 50+ 种空间概念方案。",
+                intro: "利用 SD + ControlNet 在 1 小时内产出 50+ 种空间概念方案，大幅拓宽设计边界。",
                 subProjects: [
                     {
-                        title: "方案 A: 宋氏风格",
-                        desc: "一种褪尽繁华、回归本真的美。它像一位穿着素袍、满腹经纶的文人，不靠外在的珠光宝气，只凭一身风骨和内在的修养，便足以让人心生敬意。",
+                        title: "方案 A: 宋氏美学",
+                        desc: "褪尽繁华、回归本真的东方意境，将自然肌理与空灵气质融合，呈现文人风骨。",
                         img: "images/04-rsfg/001.png",
                         gallery: [
                             "images/04-rsfg/001.png",
@@ -264,8 +274,8 @@
                         ]
                     },
                     {
-                        title: "方案 B: 现代简约风格",
-                        desc: "结合 Lora 模型强化 简洁的、温暖的、朴素的、有岁月感的，它允许材料的自然变化（如木头的包浆），追求一种“空灵”的禅意,提供具有视觉冲击力的概念参考。",
+                        title: "方案 B: 现代简约",
+                        desc: "温暖的、朴素的、富有岁月感的现代居所，通过Lora强化简洁与空灵禅意。",
                         img: "images/02-xdjy/001.png",
                         gallery: [
                              "images/02-xdjy/001.png",
@@ -278,8 +288,8 @@
                         ]
                     },
                     {
-                        title: "方案 C: 欧式风格",
-                        desc: "模拟欧式风格的线条美（如墙面精致的石膏线条、人字拼木地板、优雅的拱门），辅助甲方在项目初期确定材质基调，减少沟通成本。",
+                        title: "方案 C: 简欧风格",
+                        desc: "优雅石膏线条、人字拼地板、拱门元素的现代转译，辅助初期定调材质基调。",
                         img: "images/01-os/001.png",
                         gallery: [
                             "images/01-os/001.png",
@@ -291,108 +301,71 @@
                     }
                 ]
             },
-            // 2. AI 作品 - 材质模拟
+            // 2. 材质与光影智能模拟
             {
                 id: 'ai-2',
                 title: "材质与光影智能模拟",
-                category: "AI Texture / Rendering",
+                category: "AI Texture / 实时渲染",
                 cover: "images/12-cz/02.png",
-                intro: "摆脱传统渲染长耗时，实时生成不同材质的光影表现。",
+                intro: "摆脱传统渲染长耗时，实时生成不同材质的光影表现，精准推敲材料质感。",
                 subProjects: [
                     {
                         title: "变体: 浅色橡木",
-                        desc: "保持空间模型不变，仅通过 AI 蒙版重绘地面与墙面材质，展示温馨居家氛围。",
+                        desc: "保持空间模型不变，AI蒙版重绘地面与墙面，展现温馨居家氛围。",
                         img: "images/12-cz/01.png",
-                        gallery: ["images/12-cz/01y.png",
-                                  "images/12-cz/01.png",
-                                   ]
+                        gallery: ["images/12-cz/01y.png", "images/12-cz/01.png"]
                     },
                     {
                         title: "变体: 深灰微水泥",
-                        desc: "快速切换至冷色调微水泥材质，模拟商业展厅的专业感与冷静氛围。",
+                        desc: "切换至冷色调微水泥材质，模拟商业展厅的专业感与冷静气质。",
                         img: "images/12-cz/02.png",
-                        gallery: ["images/12-cz/02y.png",
-                                  "images/12-cz/02.png",
-                                  ]
+                        gallery: ["images/12-cz/02y.png", "images/12-cz/02.png"]
                     },
                     {
                         title: "变体: 大理石奢华",
                         desc: "注入大理石纹理与金属收边细节，一键生成轻奢风格效果图。",
                         img: "images/12-cz/03.png",
-                        gallery: ["images/12-cz/03y.png",
-                                  "images/12-cz/03.png", 
-                                   ]
+                        gallery: ["images/12-cz/03y.png", "images/12-cz/03.png"]
                     }
                 ]
             },
-            // 3. AI 作品 - 线稿转图
+            // 3. 草图至效果图直出
             {
                 id: 'ai-3',
                 title: "草图至效果图直出",
-                category: "AI ControlNet / Sketch",
+                category: "AI ControlNet / 草图转译",
                 cover: "images/05-fa/xgt/01.png",
-                intro: "实现草图模型到 4K 级效果图的 '一键' 转化。",
+                intro: "实现从SketchUp模型/手绘线稿到4K级效果图的‘一键’转化，效率革命。",
                 subProjects: [
                     {
                         title: "阶段一: 草图模型",
-                        desc: "SketchUp快速堆砌的空间透视草图，确定基本的体块关系与构图视角。",
+                        desc: "SketchUp快速堆砌空间透视草图，确定体块关系与构图视角。",
                         img: "images/05-fa/ct/01.jpg",
-                        gallery: ["images/05-fa/ct/01.jpg",
-                                  "images/05-fa/ct/02.jpg", 
-                                  "images/05-fa/ct/03.jpg",
-                                  "images/05-fa/ct/04.jpg",
-                                  "images/05-fa/ct/05.jpg",
-                                  "images/05-fa/ct/06.jpg",
-                                  "images/05-fa/ct/07.jpg",
-                                  "images/05-fa/ct/08.jpg",
-                                  "images/05-fa/ct/09.jpg",
-                                  ]
+                        gallery: ["images/05-fa/ct/01.jpg","images/05-fa/ct/02.jpg","images/05-fa/ct/03.jpg","images/05-fa/ct/04.jpg","images/05-fa/ct/05.jpg","images/05-fa/ct/06.jpg","images/05-fa/ct/07.jpg","images/05-fa/ct/08.jpg","images/05-fa/ct/09.jpg"]
                     },
                     {
                         title: "阶段二: AI 细化",
-                        desc: "ControlNet 提取线条结构，Stable Diffusion 自动补全灯光、材质与配饰细节。",
+                        desc: "ControlNet提取线条结构，Stable Diffusion自动补全灯光、材质与配饰细节。",
                         img: "images/05-fa/xgt/01.png",
-                        gallery: ["images/05-fa/xgt/09.png",
-                                  "images/05-fa/xgt/01.png",
-                                  "images/05-fa/xgt/02.png",
-                                  "images/05-fa/xgt/03.png",
-                                  "images/05-fa/xgt/04.png",
-                                  "images/05-fa/xgt/05.png",
-                                  "images/05-fa/xgt/06.png",
-                                  "images/05-fa/xgt/07.png",
-                                  "images/05-fa/xgt/08.png",
-                                  ]
+                        gallery: ["images/05-fa/xgt/09.png","images/05-fa/xgt/01.png","images/05-fa/xgt/02.png","images/05-fa/xgt/03.png","images/05-fa/xgt/04.png","images/05-fa/xgt/05.png","images/05-fa/xgt/06.png","images/05-fa/xgt/07.png","images/05-fa/xgt/08.png"]
                     },
                     {
                         title: "阶段三: 最终交付",
-                        desc: "经过后期微调的高保真效果图，从草图到成品仅耗时 90 分钟，效率提升显著。",
+                        desc: "经过后期微调的高保真效果图，从草图到成品耗时约90分钟，提效显著。",
                         img: "video/004.mp4", 
                         gallery: ["video/004.mp4"]
                     }
                 ]
             },
-            // 4. 百能家居万宁店
+            // 4. 百能家居万宁店 (商业零售)
             {
                 id: 4,
                 title: "百能家居万宁店",
                 category: "商业零售 / SI研发",
                 cover: "images/07-bn2/01.jpg",
-                intro: "主导第五代全国加盟展厅标准化手册（SI）制定，降低 30% 落地成本。",
-                details: "不仅定义视觉，更通过商业逻辑优化，实现门店平均停留时间增加 25%，转化率提升 40%。",
-                images: ["images/07-bn2/01.jpg",
-                         "images/07-bn2/02.jpg",
-                         "images/07-bn2/03.jpg",
-                         "images/07-bn2/04.jpg",
-                         "images/07-bn2/05.jpg",
-                         "images/07-bn2/06.jpg",
-                         "images/07-bn2/07.jpg",
-                         "images/07-bn2/08.jpg",
-                         "images/07-bn2/09.jpg",
-                         "images/07-bn2/10.jpg",
-                         "images/07-bn2/11.jpg",
-                         "images/07-bn2/12.jpg",
-                         "images/07-bn2/13.jpg",
-                         ]
+                intro: "主导第五代全国加盟展厅标准化手册（SI）制定，优化动线及展陈逻辑。",
+                details: "不仅定义视觉，更通过商业逻辑优化，实现门店平均停留时间增加25%，转化率提升40%。",
+                images: ["images/07-bn2/01.jpg","images/07-bn2/02.jpg","images/07-bn2/03.jpg","images/07-bn2/04.jpg","images/07-bn2/05.jpg","images/07-bn2/06.jpg","images/07-bn2/07.jpg","images/07-bn2/08.jpg","images/07-bn2/09.jpg","images/07-bn2/10.jpg","images/07-bn2/11.jpg","images/07-bn2/12.jpg","images/07-bn2/13.jpg"]
             },
             // 5. 奥迅设计售楼部空间
             {
@@ -400,18 +373,9 @@
                 title: "奥迅设计售楼部空间",
                 category: "售楼部 / 样板间",
                 cover: "images/09-ax/10.png",
-                intro: "完成从概念创意、到深化设计及施工落地。",
-                details: "材料选型与成本控制，优化设计落地可行性。",
-                images: ["images/09-ax/01.jpg",
-                         "images/09-ax/02.jpg",
-                         "images/09-ax/03.jpg",
-                         "images/09-ax/04.jpg",
-                         "images/09-ax/05.jpg",
-                         "images/09-ax/06.jpg",
-                         "images/09-ax/07.jpg",
-                         "images/09-ax/08.jpg",
-                         "images/09-ax/09.jpg",
-                          ]
+                intro: "完成从概念创意、深化设计到施工落地全流程，兼顾艺术性与成本控制。",
+                details: "材料选型与成本控制，优化设计落地可行性，呈现高端体验式营销场景。",
+                images: ["images/09-ax/01.jpg","images/09-ax/02.jpg","images/09-ax/03.jpg","images/09-ax/04.jpg","images/09-ax/05.jpg","images/09-ax/06.jpg","images/09-ax/07.jpg","images/09-ax/08.jpg","images/09-ax/09.jpg"]
             },
             // 6. 维意定制沉浸式样板店
             {
@@ -420,73 +384,38 @@
                 category: "全屋定制 / 场景营销",
                 cover: "images/08-wy/02.jpg",
                 intro: "负责全国核心样板店策略，将“生活方式”植入展厅，实现营销协同。",
-                details: "重点解决多品类（橱/衣/木）融合展示的呼吸感，解决产品密度与体验的平衡。",
-                images: ["images/08-wy/01.jpg",
-                         "images/08-wy/02.jpg",
-                         "images/08-wy/03.jpg",
-                         "images/08-wy/04.jpg",
-                         "images/08-wy/05.jpg",
-                         "images/08-wy/06.png",
-                         "images/08-wy/07.png",
-                         ]
+                details: "重点解决多品类（橱/衣/木）融合展示的呼吸感，平衡产品密度与体验动线。",
+                images: ["images/08-wy/01.jpg","images/08-wy/02.jpg","images/08-wy/03.jpg","images/08-wy/04.jpg","images/08-wy/05.jpg","images/08-wy/06.png","images/08-wy/07.png"]
             },
             // 7. 百能家居山西太原店
             {
                 id: 7,
                 title: "百能家居山西太原店",
-                category: "Retail / Specialty Store",
+                category: "零售 / 专卖店",
                 cover: "images/06-bn/05.jpg",
                 intro: "标准化专卖店设计，强化品牌不锈钢橱柜的高端金属质感。",
-                details: "通过灯光色温的精确控制，中和金属的冰冷感，营造现代且温馨的居家购物体验。",
-                images: ["images/06-bn/08.jpg",
-                         "images/06-bn/01.jpg",
-                         "images/06-bn/02.jpg", 
-                         "images/06-bn/03.jpg",
-                         "images/06-bn/04.jpg",
-                         "images/06-bn/05.jpg",
-                         "images/06-bn/06.jpg",
-                         "images/06-bn/07.jpg",
-                          ]
+                details: "通过灯光色温精确控制，中和金属的冰冷感，营造现代且温馨的购物体验。",
+                images: ["images/06-bn/08.jpg","images/06-bn/01.jpg","images/06-bn/02.jpg","images/06-bn/03.jpg","images/06-bn/04.jpg","images/06-bn/05.jpg","images/06-bn/06.jpg","images/06-bn/07.jpg"]
             },
             // 8. 伊肤泉店面SI设计
             {
                 id: 8,
                 title: "伊肤泉店面SI设计",
-                category: "Beauty / Brand SI",
+                category: "美业 / 品牌SI",
                 cover: "images/10-yfq/06.png",
-                intro: "针对美业连锁品牌构建的 SI 视觉识别系统。",
-                details: "提取品牌基因中的'纯净'与'科技'元素，打造极具辨识度的医疗美容空间形象。",
-                images: ["images/10-yfq/01.png",
-                         "images/10-yfq/02.png",
-                         "images/10-yfq/03.png",
-                         "images/10-yfq/04.png",
-                         "images/10-yfq/05.png",
-                         "images/10-yfq/06.png",
-                         "images/10-yfq/07.png",
-                          ]
+                intro: "针对美业连锁品牌构建的SI视觉识别系统，传递纯净科技感。",
+                details: "提取品牌基因中的‘纯净’与‘科技’元素，打造极具辨识度的医美空间形象。",
+                images: ["images/10-yfq/01.png","images/10-yfq/02.png","images/10-yfq/03.png","images/10-yfq/04.png","images/10-yfq/05.png","images/10-yfq/06.png","images/10-yfq/07.png"]
             },
             // 9. 百能家居展厅
             {
                 id: 9,
                 title: "百能家居展厅",
-                category: "Exhibition / Showroom",
+                category: "展览 / 总部展厅",
                 cover: "images/11-zt/02.jpg",
                 intro: "旗舰级总部展厅规划，全方位展示全屋定制解决方案。",
-                details: "设置沉浸式生活场景体验区，通过合理的动线引导，提升客户的参观时长与留资率。",
-                images: ["images/11-zt/01.jpg",
-                         "images/11-zt/02.jpg", 
-                         "images/11-zt/03.jpg",
-                         "images/11-zt/04.jpg",
-                         "images/11-zt/05.jpg",
-                         "images/11-zt/06.jpg",
-                         "images/11-zt/07.jpg",
-                         "images/11-zt/08.jpg",
-                         "images/11-zt/09.jpg",
-                         "images/11-zt/10.jpg",
-                         "images/11-zt/11.jpg",
-                         "images/11-zt/12.jpg",
-                         "images/11-zt/13.jpg",
-                          ]
+                details: "设置沉浸式生活场景体验区，通过动线引导提升参观时长与留资转化。",
+                images: ["images/11-zt/01.jpg","images/11-zt/02.jpg","images/11-zt/03.jpg","images/11-zt/04.jpg","images/11-zt/05.jpg","images/11-zt/06.jpg","images/11-zt/07.jpg","images/11-zt/08.jpg","images/11-zt/09.jpg","images/11-zt/10.jpg","images/11-zt/11.jpg","images/11-zt/12.jpg","images/11-zt/13.jpg"]
             }
         ];
 
@@ -494,171 +423,165 @@
         const videoGrid = document.getElementById('videoGrid');
         videoProjects.forEach(v => {
             const card = document.createElement('div');
-            card.className = "work-card video-card group shadow-lg rounded-xl overflow-hidden";
+            card.className = "work-card group rounded-xl overflow-hidden shadow-sm border border-gray-100";
             card.innerHTML = `
                 <div class="h-48 overflow-hidden relative bg-black">
                     <video muted loop playsinline class="w-full h-full object-cover">
                         <source src="${v.videoUrl}" type="video/mp4">
                     </video>
-                    <div class="overlay absolute inset-0 flex items-center justify-center text-white pointer-events-none">
-                        <i class="fas fa-play-circle play-icon"></i>
+                    <div class="overlay absolute inset-0 flex items-center justify-center text-white pointer-events-none bg-black/20">
+                        <i class="fas fa-play-circle text-3xl text-white/80"></i>
                     </div>
                 </div>
-                <div class="p-6 bg-white" onclick="openVideoModal('${v.id}')">
-                    <p class="text-[10px] accent-color font-bold mb-2 uppercase tracking-widest">${v.category}</p>
-                    <h3 class="text-xl font-bold mb-2">${v.title}</h3>
+                <div class="p-5 bg-white" onclick="openVideoModal('${v.id}')">
+                    <p class="text-[10px] accent-color font-bold mb-2 uppercase tracking-wider">${v.category}</p>
+                    <h3 class="text-lg font-bold">${v.title}</h3>
                 </div>
             `;
             const video = card.querySelector('video');
             if(video) {
-                card.onmouseenter = () => { try { video.play(); } catch(e){} };
-                card.onmouseleave = () => { try { video.pause(); video.currentTime = 0; } catch(e){} };
+                card.onmouseenter = () => { video.play().catch(e=>{}); };
+                card.onmouseleave = () => { video.pause(); video.currentTime = 0; };
             }
             videoGrid.appendChild(card);
         });
 
         // 初始化作品网格
-        const grid = document.getElementById('portfolioGrid');
+        const gridPortfolio = document.getElementById('portfolioGrid');
         projects.forEach(p => {
             const card = document.createElement('div');
-            card.className = "work-card group shadow-sm rounded-xl overflow-hidden";
+            card.className = "work-card group rounded-xl overflow-hidden shadow-sm bg-white";
             card.onclick = () => openModal(p.id);
-            
             const isAI = p.category.includes("AI");
-            const badge = isAI ? `<span class="absolute top-4 left-4 bg-[#9333ea] text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg z-10 flex items-center"><i class="fas fa-robot mr-1"></i> AI POWERED</span>` : '';
-
+            const badge = isAI ? `<span class="absolute top-4 left-4 bg-[#8b5a2b] text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md z-10 flex items-center gap-1"><i class="fas fa-robot text-xs"></i> AI 增强</span>` : '';
             card.innerHTML = `
                 <div class="h-64 overflow-hidden relative">
                     ${badge}
-                    <img src="${p.cover}" class="w-full h-full object-cover">
-                    <div class="overlay absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-100">
-                        <span class="border border-white px-6 py-2 text-xs uppercase tracking-widest bg-black/30 backdrop-blur-sm hover:bg-white hover:text-black transition-colors">
-                            ${isAI ? 'Explore Cases / 查看案例' : 'View Detail / 查看详情'}
-                        </span>
+                    <img src="${p.cover}" class="w-full h-full object-cover" alt="${p.title}">
+                    <div class="overlay absolute inset-0 flex items-center justify-center text-white bg-black/20 transition-all">
+                        <span class="border border-white px-5 py-2 text-xs uppercase tracking-wider bg-black/20 backdrop-blur-sm rounded-full hover:bg-white hover:text-black transition-all">探索详情</span>
                     </div>
                 </div>
-                <div class="p-6 bg-white border-t border-gray-50">
-                    <p class="text-[10px] ${isAI ? 'text-[#9333ea]' : 'accent-color'} font-bold mb-2 uppercase tracking-widest">${p.category}</p>
-                    <h3 class="text-lg font-bold mb-2 truncate">${p.title}</h3>
+                <div class="p-5">
+                    <p class="text-[10px] ${isAI ? 'text-[#8b5a2b]' : 'accent-color'} font-bold mb-1.5 tracking-wider">${p.category}</p>
+                    <h3 class="text-lg font-bold">${p.title}</h3>
+                    <p class="text-xs text-gray-500 mt-2 line-clamp-2">${p.intro}</p>
                 </div>
             `;
-            grid.appendChild(card);
+            gridPortfolio.appendChild(card);
         });
 
-        // --- 核心逻辑：3层弹窗展示 ---
-        
-        // 1. 打开项目弹窗 (Level 2: 概览)
+        // 打开项目模态框 (第二层/普通项目或AI概览)
         function openModal(id) {
             const p = projects.find(item => item.id === id);
             if(!p) return;
-            
             const modal = document.getElementById('projectModal');
             const modalBody = document.getElementById('modalBody');
-            
             let contentHTML = '';
-
-            // AI 项目：展示 3 个子方案卡片
             if (p.subProjects && p.subProjects.length > 0) {
-                let subCardsHTML = p.subProjects.map((sub, index) => {
-                    const isVideo = sub.img.toLowerCase().endsWith('.mp4');
+                let subCardsHTML = p.subProjects.map((sub, idx) => {
+                    const isVideo = sub.img && sub.img.toLowerCase().endsWith('.mp4');
                     const mediaHtml = isVideo 
                         ? `<video src="${sub.img}" muted loop playsinline onmouseenter="this.play()" onmouseleave="this.pause(); this.currentTime=0;" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"></video>
-                           <div class="absolute inset-0 pointer-events-none flex items-center justify-center"><i class="fas fa-video text-white/50 text-2xl"></i></div>`
+                           <div class="absolute inset-0 pointer-events-none flex items-center justify-center"><i class="fas fa-video text-white/60 text-2xl"></i></div>`
                         : `<img src="${sub.img}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">`;
-
                     return `
-                    <div onclick="openSubProject('${p.id}', ${index})" class="group cursor-pointer hover:bg-gray-50 p-4 rounded-xl transition-all border border-transparent hover:border-gray-200">
-                        <div class="h-56 overflow-hidden rounded-lg mb-4 shadow-md relative bg-black/5">
+                    <div onclick="openSubProject('${p.id}', ${idx})" class="group cursor-pointer hover:bg-gray-50 p-4 rounded-2xl transition-all border border-transparent hover:border-gray-200">
+                        <div class="h-56 overflow-hidden rounded-xl mb-4 shadow-md relative bg-gray-100">
                             <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all z-10 flex items-center justify-center pointer-events-none">
-                                <span class="opacity-0 group-hover:opacity-100 text-white border border-white px-3 py-1 text-xs uppercase">More Detail</span>
+                                <span class="opacity-0 group-hover:opacity-100 text-white border border-white px-3 py-1 text-xs uppercase rounded-full bg-black/30">详细图集</span>
                             </div>
                             ${mediaHtml}
                         </div>
-                        <h4 class="text-lg font-bold mb-2 text-gray-800 group-hover:text-[#9333ea] transition-colors">${sub.title} <i class="fas fa-arrow-right text-xs ml-2 opacity-0 group-hover:opacity-100"></i></h4>
-                        <p class="text-xs text-gray-500 leading-relaxed pt-2">${sub.desc}</p>
+                        <h4 class="text-lg font-bold mb-2 text-gray-800 group-hover:text-[#b88b4f] transition-colors">${sub.title} <i class="fas fa-arrow-right text-xs ml-1 opacity-0 group-hover:opacity-100"></i></h4>
+                        <p class="text-xs text-gray-500">${sub.desc.substring(0, 80)}${sub.desc.length>80?'...':''}</p>
                     </div>
                 `}).join('');
-
                 contentHTML = `
                     <div class="fade-in">
-                        <div class="text-center mb-10">
-                            <span class="bg-[#9333ea]/10 text-[#9333ea] px-3 py-1 rounded text-xs font-bold uppercase tracking-widest mb-3 inline-block">AI Workflow Demonstration</span>
-                            <h2 class="text-3xl md:text-4xl font-bold mb-4">${p.title}</h2>
+                        <div class="text-center mb-8">
+                            <span class="bg-amber-100 text-[#b88b4f] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">AI 工作流演示</span>
+                            <h2 class="text-3xl md:text-4xl font-bold mt-4 mb-3">${p.title}</h2>
                             <p class="text-gray-500 max-w-2xl mx-auto">${p.intro}</p>
-                            <p class="text-xs text-gray-400 mt-4 animate-bounce">Click any case below to see details / 点击下方案例查看详情</p>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            ${subCardsHTML}
-                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">${subCardsHTML}</div>
                     </div>
                 `;
             } else {
-                // 普通项目：展示详情
                 contentHTML = `
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 fade-in">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 fade-in">
                         <div class="lg:col-span-1">
-                            <p class="accent-color font-bold mb-2 tracking-widest text-xs uppercase">— Project Archive</p>
-                            <h2 class="text-3xl font-bold mb-6">${p.title}</h2>
-                            <div class="space-y-6 text-gray-500 text-sm leading-relaxed">
-                                <div><h4 class="font-bold text-black mb-1 italic">核心概述</h4><p>${p.intro}</p></div>
-                                <div><h4 class="font-bold text-black mb-1 italic">深度解析</h4><p>${p.details}</p></div>
+                            <p class="accent-color font-bold mb-2 tracking-wider text-xs uppercase">项目档案</p>
+                            <h2 class="text-3xl font-bold mb-5">${p.title}</h2>
+                            <div class="space-y-5 text-gray-500 text-sm">
+                                <div><h4 class="font-bold text-black mb-1">核心概述</h4><p>${p.intro}</p></div>
+                                <div><h4 class="font-bold text-black mb-1">深度解析</h4><p>${p.details || p.intro}</p></div>
                             </div>
                         </div>
-                        <div class="lg:col-span-2 space-y-8">
-                            ${p.images.map(img => `<img src="${img}" class="w-full rounded-xl shadow-md border border-gray-100">`).join('')}
-                        </div>
+                        <div class="lg:col-span-2 space-y-6">${p.images.map(img => `<img src="${img}" class="w-full rounded-xl shadow-md border border-gray-100">`).join('')}</div>
                     </div>
                 `;
             }
-
             modalBody.innerHTML = contentHTML;
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
 
-        // 2. 打开子项目详情 (Level 3: 详情图集/视频)
         function openSubProject(projectId, subIndex) {
             const p = projects.find(item => item.id === projectId);
             const sub = p.subProjects[subIndex];
             const modalBody = document.getElementById('modalBody');
-            
             document.querySelector('.modal-content').scrollTop = 0;
-
             const galleryHTML = sub.gallery.map(item => {
                 if (item.toLowerCase().endsWith('.mp4')) {
-                    return `
-                        <div class="w-full aspect-video bg-black rounded-lg shadow-lg overflow-hidden relative">
-                            <video src="${item}" controls autoplay class="w-full h-full"></video>
-                        </div>
-                    `;
+                    return `<div class="w-full aspect-video bg-black rounded-xl shadow-lg overflow-hidden"><video src="${item}" controls autoplay class="w-full h-full"></video></div>`;
                 } else {
-                    return `<img src="${item}" class="w-full rounded-lg shadow-lg">`;
+                    return `<img src="${item}" class="w-full rounded-xl shadow-lg border">`;
                 }
             }).join('');
-
             modalBody.innerHTML = `
                 <div class="fade-in">
-                    <!-- 返回按钮 -->
-                    <button onclick="openModal('${projectId}')" class="mb-6 flex items-center text-gray-500 hover:text-[#9333ea] transition-colors font-bold text-sm">
-                        <i class="fas fa-arrow-left mr-2"></i> Back to Overview / 返回概览
+                    <button onclick="openModal('${projectId}')" class="mb-6 flex items-center text-gray-500 hover:text-[#b88b4f] transition-colors font-medium text-sm gap-2">
+                        <i class="fas fa-arrow-left"></i> 返回项目概览
                     </button>
-
-                    <div class="mb-8 border-l-4 border-[#9333ea] pl-6">
+                    <div class="mb-8 border-l-4 border-[#b88b4f] pl-6">
                         <h2 class="text-3xl font-bold mb-2">${sub.title}</h2>
                         <p class="text-gray-500">${sub.desc}</p>
                     </div>
-
-                    <div class="grid grid-cols-1 gap-8">
-                        ${galleryHTML}
-                    </div>
-                    
-                    <div class="text-center mt-12 text-gray-300 text-sm uppercase tracking-widest">
-                        End of Presentation
-                    </div>
+                    <div class="grid grid-cols-1 gap-7">${galleryHTML}</div>
+                    <div class="text-center mt-10 text-gray-300 text-xs">——  END  ——</div>
                 </div>
             `;
         }
 
-        // 视频弹窗 (首页动态演示)
         function openVideoModal(id) {
-            const video = videoProjects.find(v => v.id ===
+            const videoItem = videoProjects.find(v => v.id === id);
+            if(!videoItem) return;
+            const modal = document.getElementById('projectModal');
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <div class="fade-in">
+                    <div class="aspect-video w-full bg-black rounded-2xl shadow-2xl overflow-hidden">
+                        <video controls autoplay class="w-full h-full"><source src="${videoItem.videoUrl}" type="video/mp4"></video>
+                    </div>
+                    <div class="mt-6">
+                        <p class="accent-color font-bold text-xs tracking-wider uppercase">动态案例</p>
+                        <h2 class="text-2xl font-bold mt-1">${videoItem.title}</h2>
+                        <p class="text-gray-500 text-sm mt-2">${videoItem.intro}</p>
+                    </div>
+                </div>
+            `;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('projectModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            const videos = document.querySelectorAll('#modalBody video');
+            videos.forEach(v => v.pause());
+        }
+        window.onclick = (e) => { if (e.target == document.getElementById('projectModal')) closeModal(); }
+    </script>
+</body>
+</html>
